@@ -1,53 +1,68 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es-MX" x-data="landingPage()" :class="{ 'dark': darkMode }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://assets.calendly.com https://js.hsforms.net https://forms.hsforms.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://assets.calendly.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.whatsapp.com https://formspree.io https://forms.hsforms.com; frame-src https://calendly.com https://forms.hsforms.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://forms.hsforms.com;">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://assets.calendly.com https://js.hsforms.net https://forms.hsforms.com https://www.googletagmanager.com https://animejs.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://assets.calendly.com https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self' https://api.whatsapp.com https://formspree.io https://forms.hsforms.com https://www.google-analytics.com https://analytics.google.com; frame-src https://calendly.com https://forms.hsforms.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io https://forms.hsforms.com https://api.netlify.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <title>MultiConstrucciones | Servicios de Mantenimiento Residencial en Puebla</title>
+
+    <title>MultiConstrucciones | Mantenimiento Residencial en Puebla</title>
     <meta name="description" content="Jardinería, pintura, plomería, electricidad, impermeabilización, albañilería y lavado de cisternas en Puebla. Cotización sin costo y garantía por escrito.">
     <meta name="keywords" content="mantenimiento residencial puebla, jardinería puebla, pintura puebla, plomería puebla, impermeabilización puebla, albañilería puebla">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://multiconstrucciones.com/">
-    
+
     <meta property="og:type" content="website">
     <meta property="og:title" content="MultiConstrucciones | Mantenimiento Residencial en Puebla">
-    <meta property="og:description" content="Construyendo confianza. Cotización sin costo.">
+    <meta property="og:description" content="Cuidamos tu casa como si fuera la nuestra. Cotización sin costo y garantía por escrito.">
     <meta property="og:image" content="https://multiconstrucciones.com/og-image.jpg">
     <meta property="og:url" content="https://multiconstrucciones.com/">
     <meta property="og:locale" content="es_MX">
-    
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MultiConstrucciones | Mantenimiento Residencial en Puebla">
     <meta name="twitter:description" content="Servicios de mantenimiento residencial en Puebla y zona metropolitana.">
-    
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔨</text></svg>">
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+        :root { --primary: #2f855a; --secondary: #2b6cb0; --accent: #f6ad55; --bg: #ffffff; --bg-alt: #f7fafc; --text: #1a202c; --text-muted: #718096; --card-bg: #ffffff; --border: #e2e8f0; }
+        .dark { --primary: #48bb78; --secondary: #63b3ed; --accent: #f6ad55; --bg: #1a202c; --bg-alt: #2d3748; --text: #f7fafc; --text-muted: #a0aec0; --card-bg: #2d3748; --border: #4a5568; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; overflow-x: hidden; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
         .hero-gradient { background: linear-gradient(135deg, #2f855a 0%, #2b6cb0 100%); }
-        .loading-skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
         @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .lazy-load { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+        .loading-skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+        .lazy-load { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
         .lazy-load.loaded { opacity: 1; transform: translateY(0); }
         [x-cloak] { display: none !important; }
-        .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
-        .stagger-item.show { opacity: 1; transform: translateY(0); }
-        .count-up { display: inline-block; }
-        .loader-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: #fff; transition: opacity 0.6s, visibility 0.6s; }
+        .loader-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--bg); transition: opacity 0.6s, visibility 0.6s; }
         .loader-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loader-spinner { width: 48px; height: 48px; border: 4px solid #e2e8f0; border-top-color: #2f855a; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .loader-spinner { width: 48px; height: 48px; border: 4px solid #e2e8f0; border-top-color: #2f855a; border-radius: 50%; animation: spin 0.8s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .shrink-nav { transition: all 0.3s; }
-        .shrink-nav.scrolled { height: 56px !important; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(47, 133, 90, 0.3); } 50% { box-shadow: 0 0 40px rgba(47, 133, 90, 0.6); } }
+        @keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px) saturate(1.5); -webkit-backdrop-filter: blur(20px) saturate(1.5); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .dark .glass { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--secondary)); z-index: 9998; width: 0%; transition: width 0.1s linear; }
+        .animate-gradient { background-size: 200% 200%; animation: gradient-shift 4s ease infinite; }
+        @media (prefers-reduced-motion: reduce) { .lazy-load { opacity: 1; transform: none; } * { animation-duration: 0.01ms !important; } }
+        .parallax-layer { will-change: transform; }
+        .lightbox-backdrop { background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); }
+        .dark-toggle { cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; transition: background 0.3s; }
+        .dark-toggle:hover { background: rgba(0, 0, 0, 0.05); }
+        .dark .dark-toggle:hover { background: rgba(255, 255, 255, 0.1); }
+        ::selection { background: var(--primary); color: white; }
     </style>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -57,101 +72,97 @@
                         primary: '#2f855a',
                         secondary: '#2b6cb0',
                         accent: '#f6ad55'
-                    }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
                 }
             }
         }
     </script>
-    
+
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-Qvdy6UL/w3xdU+susuNOI9s0b/r0U0XAXIIK/Hz+clbIUqFkS15/DkjULE/Fb7YKwUf6Bqn/lN5B+EkjpUOqVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');</script>
+
     <script type="application/ld+json">
-    {
+    [{
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "MultiConstrucciones",
-        "description": "Servicios de mantenimiento residencial en Puebla: jardinería, herreria, pintura, plomería, electricidad, impermeabilización, albañilería y lavado de cisternas.",
+        "description": "Servicios de mantenimiento residencial en Puebla: jardinería, pintura, plomería, electricidad, impermeabilización, albañilería y lavado de cisternas.",
+        "url": "https://multiconstrucciones.com",
         "image": "https://multiconstrucciones.com/logo.png",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Bonampak 7A, La Rivera",
-            "addressLocality": "San Andrés Cholula",
-            "addressRegion": "PUE",
-            "postalCode": "72813",
-            "addressCountry": "MX"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "19.0507",
-            "longitude": "-98.2751"
-        },
+        "address": { "@type": "PostalAddress", "streetAddress": "Bonampak 7A, La Rivera", "addressLocality": "San Andrés Cholula", "addressRegion": "PUE", "postalCode": "72813", "addressCountry": "MX" },
+        "geo": { "@type": "GeoCoordinates", "latitude": "19.0507", "longitude": "-98.2751" },
         "telephone": "+52-222-255-3525",
         "priceRange": "$$",
-        "openingHoursSpecification": [{
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "opens": "08:00",
-            "closes": "19:00"
-        }],
-        "areaServed": ["Puebla", "Angelópolis", "Cholula", "San Andrés Cholula", "San Pedro Cholula"],
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "127"
-        }
-    }
-    </script>
-    
-    <script type="application/ld+json">
+        "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "19:00" }],
+        "areaServed": ["Puebla","Angelópolis","Cholula","San Andrés Cholula","San Pedro Cholula"],
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" },
+        "sameAs": ["https://wa.me/522222553525"]
+    },
     {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [{
-            "@type": "Question",
-            "name": "¿Cuál es el área de cobertura?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Cubrimos toda Puebla y zona metropolitana incluyendo Angelópolis, Cholula, San Andrés y San Pedro Cholula."
-            }
-        }]
-    }
+        "mainEntity": [
+            { "@type": "Question", "name": "¿Cuál es el área de cobertura?", "acceptedAnswer": { "@type": "Answer", "text": "Cubrimos toda Puebla y zona metropolitana incluyendo Angelópolis, Cholula, San Andrés y San Pedro Cholula." } },
+            { "@type": "Question", "name": "¿La cotización tiene algún costo?", "acceptedAnswer": { "@type": "Answer", "text": "No, todas nuestras cotizaciones son completamente gratuitas sin compromiso." } },
+            { "@type": "Question", "name": "¿Ofrecen garantía?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, todos nuestros trabajos cuentan con garantía por escrito." } }
+        ]
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Jardinería, Pintura, Plomería, Electricidad, Impermeabilización, Albañilería",
+        "provider": { "@type": "LocalBusiness", "name": "MultiConstrucciones" },
+        "areaServed": "Puebla"
+    }]
     </script>
 </head>
 
-<body class="antialiased" x-data="landingPage()">
+<body class="antialiased transition-colors duration-300">
 
-    <!-- Loader -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <div class="loader-overlay" id="page-loader" x-init="setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 800)">
         <div class="loader-spinner"></div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm" x-data="{ scrolled: false }" 
-         @scroll.window="scrolled = window.pageYOffset > 20">
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300" x-data="{ scrolled: false }"
+         @scroll.window="scrolled = window.pageYOffset > 20;
+         document.getElementById('scroll-progress').style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100 + '%'"
+         :class="scrolled ? 'glass shadow-lg' : 'bg-transparent'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0">
                     <a href="#" class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        MultiConstrucciones
+                        <span class="text-3xl">🔨</span> MultiConstrucciones
                     </a>
                 </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#servicios" class="text-gray-700 hover:text-primary transition">Servicios</a>
-                    <a href="#nosotros" class="text-gray-700 hover:text-primary transition">Nosotros</a>
-                    <a href="#testimonios" class="text-gray-700 hover:text-primary transition">Testimonios</a>
-                    <a href="#contacto" class="text-gray-700 hover:text-primary transition">Contacto</a>
-                    <button @click="openCalendly()" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full hover:shadow-lg transition-all transform hover:scale-105">
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#servicios" class="text-gray-700 hover:text-primary transition dark:text-gray-300 dark:hover:text-primary">Servicios</a>
+                    <a href="#nosotros" class="text-gray-700 hover:text-primary transition dark:text-gray-300 dark:hover:text-primary">Nosotros</a>
+                    <a href="#testimonios" class="text-gray-700 hover:text-primary transition dark:text-gray-300 dark:hover:text-primary">Testimonios</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-primary transition dark:text-gray-300 dark:hover:text-primary">Contacto</a>
+                    <button @click="toggleDarkMode()" class="dark-toggle" aria-label="Dark mode">
+                        <svg x-show="!darkMode" class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                        <svg x-show="darkMode" x-cloak class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+                    </button>
+                    <button @click="openCalendly()" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">
                         Agendar Visita
                     </button>
                 </div>
-                
-                <div class="md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700">
+
+                <div class="md:hidden flex items-center space-x-2">
+                    <button @click="toggleDarkMode()" class="dark-toggle">
+                        <svg x-show="!darkMode" class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                        <svg x-show="darkMode" x-cloak class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+                    </button>
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700 dark:text-gray-300">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -160,27 +171,30 @@
                 </div>
             </div>
         </div>
-        
-        <div x-show="mobileMenuOpen" x-cloak x-transition class="md:hidden bg-white border-t">
+
+        <div x-show="mobileMenuOpen" x-cloak x-transition class="md:hidden glass">
             <div class="px-4 pt-2 pb-4 space-y-3">
-                <a href="#servicios" @click="mobileMenuOpen = false" class="block text-gray-700 hover:text-primary">Servicios</a>
-                <a href="#nosotros" @click="mobileMenuOpen = false" class="block text-gray-700 hover:text-primary">Nosotros</a>
-                <a href="#testimonios" @click="mobileMenuOpen = false" class="block text-gray-700 hover:text-primary">Testimonios</a>
-                <a href="#contacto" @click="mobileMenuOpen = false" class="block text-gray-700 hover:text-primary">Contacto</a>
-                <button @click="openCalendly(); mobileMenuOpen = false" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full">
+                <a href="#servicios" @click="mobileMenuOpen = false" class="block text-gray-700 dark:text-gray-300 hover:text-primary">Servicios</a>
+                <a href="#nosotros" @click="mobileMenuOpen = false" class="block text-gray-700 dark:text-gray-300 hover:text-primary">Nosotros</a>
+                <a href="#testimonios" @click="mobileMenuOpen = false" class="block text-gray-700 dark:text-gray-300 hover:text-primary">Testimonios</a>
+                <a href="#contacto" @click="mobileMenuOpen = false" class="block text-gray-700 dark:text-gray-300 hover:text-primary">Contacto</a>
+                <button @click="openCalendly(); mobileMenuOpen = false" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full animate-gradient">
                     Agendar Visita
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <canvas id="hero-canvas" class="absolute inset-0 w-full h-full"></canvas>
         <div class="absolute inset-0 bg-gradient-to-br from-primary/90 to-secondary/90"></div>
-        
+
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm mb-6 border border-white/20">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                Disponibles 24/7
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6" id="hero-title">
                 Cuidamos tu casa<br>
                 <span class="bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">como si fuera la nuestra</span>
             </h1>
@@ -188,34 +202,34 @@
                 Jardinería, pintura, plomería, electricidad, impermeabilización, albañilería y lavado de cisternas en Puebla y zona metropolitana
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button @click="scrollToContact()" class="bg-white text-primary px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all transform hover:scale-105">
+                <button @click="scrollToContact()" class="bg-white text-primary px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all transform hover:scale-105 hover:shadow-white/30">
                     Cotización Sin Costo
                 </button>
                 <a href="tel:+522222553525" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition-all">
                     Llamar: 222 255 3525
                 </a>
             </div>
-            
+
             <div class="mt-12 flex flex-wrap justify-center gap-8 text-sm">
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                     <span>4.9/5 ⭐ (127 reseñas)</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <span>+10 años de experiencia</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                     <span>+500 clientes satisfechos</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <span>Garantía por escrito</span>
                 </div>
             </div>
         </div>
-        
+
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
@@ -223,276 +237,180 @@
         </div>
     </section>
 
-    <!-- Trust Bar -->
-    <section class="bg-gray-50 py-12">
+    <section class="py-12" style="background: var(--bg-alt);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="lazy-load">
-                    <div class="text-4xl font-bold text-primary mb-2"><span class="count-up" x-data="{}" x-init="let el = $el; let target = parseInt(el.dataset.target); let i = 0; let interval = setInterval(() => { i += Math.ceil(target / 30); if (i >= target) { i = target; clearInterval(interval); } el.textContent = i; }, 40)" data-target="500">0</span>+</div>
-                    <div class="text-gray-600">Proyectos Completados</div>
+                    <div class="text-4xl font-bold mb-2" style="color: var(--primary);"><span class="count-up" x-data="{}" x-init="let el=$el; let t=parseInt(el.dataset.target); let i=0; setInterval(()=>{ i+=Math.ceil(t/30); if(i>=t){ i=t; clearInterval(); } el.textContent=i; },40)" data-target="500">0</span>+</div>
+                    <div style="color: var(--text-muted);">Proyectos Completados</div>
                 </div>
                 <div class="lazy-load">
-                    <div class="text-4xl font-bold text-primary mb-2"><span class="count-up" x-data="{}" x-init="let el = $el; let target = parseInt(el.dataset.target); let i = 0; let interval = setInterval(() => { i += Math.ceil(target / 30); if (i >= target) { i = target; clearInterval(interval); } el.textContent = i; }, 40)" data-target="10">0</span>+</div>
-                    <div class="text-gray-600">Años de Experiencia</div>
+                    <div class="text-4xl font-bold mb-2" style="color: var(--primary);"><span class="count-up" x-data="{}" x-init="let el=$el; let t=parseInt(el.dataset.target); let i=0; setInterval(()=>{ i+=Math.ceil(t/30); if(i>=t){ i=t; clearInterval(); } el.textContent=i; },40)" data-target="10">0</span>+</div>
+                    <div style="color: var(--text-muted);">Años de Experiencia</div>
                 </div>
                 <div class="lazy-load">
-                    <div class="text-4xl font-bold text-primary mb-2"><span class="count-up" x-data="{}" x-init="let el = $el; let target = parseInt(el.dataset.target); let i = 0; let interval = setInterval(() => { i += Math.ceil(target / 30); if (i >= target) { i = target; clearInterval(interval); } el.textContent = i; }, 40)" data-target="98">0</span>%</div>
-                    <div class="text-gray-600">Satisfacción</div>
+                    <div class="text-4xl font-bold mb-2" style="color: var(--primary);"><span class="count-up" x-data="{}" x-init="let el=$el; let t=parseInt(el.dataset.target); let i=0; setInterval(()=>{ i+=Math.ceil(t/30); if(i>=t){ i=t; clearInterval(); } el.textContent=i; },40)" data-target="98">0</span>%</div>
+                    <div style="color: var(--text-muted);">Satisfacción</div>
                 </div>
                 <div class="lazy-load">
-                    <div class="text-4xl font-bold text-primary mb-2"><span class="count-up" x-data="{}" x-init="let el = $el; let target = parseInt(el.dataset.target); let i = 0; let interval = setInterval(() => { i += Math.ceil(target / 30); if (i >= target) { i = target; clearInterval(interval); } el.textContent = i; }, 40)" data-target="24">0</span>/7</div>
-                    <div class="text-gray-600">Atención</div>
+                    <div class="text-4xl font-bold mb-2" style="color: var(--primary);"><span class="count-up" x-data="{}" x-init="let el=$el; let t=parseInt(el.dataset.target); let i=0; setInterval(()=>{ i+=Math.ceil(t/30); if(i>=t){ i=t; clearInterval(); } el.textContent=i; },40)" data-target="24">0</span>/7</div>
+                    <div style="color: var(--text-muted);">Atención</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Servicios -->
-    <section id="servicios" class="py-20 bg-white">
+    <section id="servicios" class="py-20" style="background: var(--bg);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 lazy-load">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nuestros Servicios</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Soluciones integrales de mantenimiento residencial en Puebla y zona metropolitana</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text);">Nuestros Servicios</h2>
+                <p class="text-xl max-w-3xl mx-auto" style="color: var(--text-muted);">Soluciones integrales de mantenimiento residencial en Puebla y zona metropolitana</p>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 0ms;">
+
+            <div class="grid md:grid-cols-3 gap-8 stagger-group">
+                <div class="lazy-load rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 0ms; background: var(--card-bg); border: 1px solid var(--border);" @mouseenter="animeHover($el)" @mouseleave="animeLeave($el)">
                     <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                        </svg>
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Jardinería</h3>
-                    <p class="text-gray-600 mb-6">Diseño, mantenimiento y remodelación de jardines. Corte de pasto, poda de árboles, sistemas de riego y paisajismo residencial.</p>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">Jardinería</h3>
+                    <p class="mb-6" style="color: var(--text-muted);">Diseño, mantenimiento y remodelación de jardines. Corte de pasto, poda de árboles, sistemas de riego y paisajismo residencial.</p>
                     <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Diseño de jardines
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Poda y mantenimiento
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Sistemas de riego
-                        </li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Diseño de jardines</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Poda y mantenimiento</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sistemas de riego</li>
                     </ul>
-                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                        Cotizar Ahora
-                    </button>
-                </div>
-                
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 100ms;">
-                    <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Pintura</h3>
-                    <p class="text-gray-600 mb-6">Pintura interior y exterior residencial. Acabados profesionales, impermeabilizantes y decorativos con los mejores materiales del mercado.</p>
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Pintura interior/exterior
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Acabados decorativos
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Impermeabilizantes
-                        </li>
-                    </ul>
-                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                        Cotizar Ahora
-                    </button>
-                </div>
-                
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 200ms;">
-                    <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Plomería</h3>
-                    <p class="text-gray-600 mb-6">Instalación y reparación de tuberías, lavabos, inodoros, calentadores y sistemas hidráulicos. Atención a fugas y drenajes.</p>
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Reparación de fugas
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Instalación de tuberías
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Calentadores y bombas
-                        </li>
-                    </ul>
-                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                        Cotizar Ahora
-                    </button>
+                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Cotizar Ahora</button>
                 </div>
 
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 300ms;">
+                <div class="lazy-load rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 100ms; background: var(--card-bg); border: 1px solid var(--border);" @mouseenter="animeHover($el)" @mouseleave="animeLeave($el)">
                     <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Electricidad</h3>
-                    <p class="text-gray-600 mb-6">Instalaciones eléctricas residenciales, mantenimiento de sistemas, reparación de cortos circuitos y modernización de tableros de control.</p>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">Pintura</h3>
+                    <p class="mb-6" style="color: var(--text-muted);">Pintura interior y exterior residencial. Acabados profesionales, impermeabilizantes y decorativos con los mejores materiales.</p>
                     <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Instalaciones completas
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Reparación y diagnóstico
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Tableros y protecciones
-                        </li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Pintura interior/exterior</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Acabados decorativos</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Impermeabilizantes</li>
                     </ul>
-                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                        Cotizar Ahora
-                    </button>
+                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Cotizar Ahora</button>
                 </div>
 
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 400ms;">
+                <div class="lazy-load rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 200ms; background: var(--card-bg); border: 1px solid var(--border);" @mouseenter="animeHover($el)" @mouseleave="animeLeave($el)">
                     <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                        </svg>
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Impermeabilización</h3>
-                    <p class="text-gray-600 mb-6">Protección de azoteas y techos contra filtraciones. Aplicación de impermeabilizantes de alta durabilidad y garantía por escrito.</p>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">Plomería</h3>
+                    <p class="mb-6" style="color: var(--text-muted);">Instalación y reparación de tuberías, lavabos, inodoros, calentadores y sistemas hidráulicos. Atención a fugas y drenajes.</p>
                     <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Azoteas y techos
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Sellado de grietas
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Garantía por escrito
-                        </li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Reparación de fugas</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Instalación de tuberías</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Calentadores y bombas</li>
                     </ul>
-                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                        Cotizar Ahora
-                    </button>
+                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Cotizar Ahora</button>
                 </div>
 
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 500ms;">
+                <div class="lazy-load rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 300ms; background: var(--card-bg); border: 1px solid var(--border);" @mouseenter="animeHover($el)" @mouseleave="animeLeave($el)">
                     <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                        </svg>
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Albañilería</h3>
-                    <p class="text-gray-600 mb-6">Construcción y reparación de muros, pisos, losas y estructuras. Remodelaciones integrales y trabajos en piedra, tablaroca y más.</p>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">Electricidad</h3>
+                    <p class="mb-6" style="color: var(--text-muted);">Instalaciones eléctricas residenciales, mantenimiento de sistemas, reparación de cortos circuitos y modernización de tableros.</p>
                     <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Remodelaciones
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Tablaroca y plafones
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Pisos y losas
-                        </li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Instalaciones completas</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Reparación y diagnóstico</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Tableros y protecciones</li>
                     </ul>
-                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                        Cotizar Ahora
-                    </button>
+                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Cotizar Ahora</button>
+                </div>
+
+                <div class="lazy-load rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 400ms; background: var(--card-bg); border: 1px solid var(--border);" @mouseenter="animeHover($el)" @mouseleave="animeLeave($el)">
+                    <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">Impermeabilización</h3>
+                    <p class="mb-6" style="color: var(--text-muted);">Protección de azoteas y techos contra filtraciones. Aplicación de impermeabilizantes de alta durabilidad y garantía por escrito.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Azoteas y techos</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sellado de grietas</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Garantía por escrito</li>
+                    </ul>
+                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Cotizar Ahora</button>
+                </div>
+
+                <div class="lazy-load rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style="transition-delay: 500ms; background: var(--card-bg); border: 1px solid var(--border);" @mouseenter="animeHover($el)" @mouseleave="animeLeave($el)">
+                    <div class="bg-gradient-to-br from-primary to-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">Albañilería</h3>
+                    <p class="mb-6" style="color: var(--text-muted);">Construcción y reparación de muros, pisos, losas y estructuras. Remodelaciones integrales y trabajos en piedra, tablaroca y más.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Remodelaciones</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Tablaroca y plafones</li>
+                        <li class="flex items-center" style="color: var(--text);"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Pisos y losas</li>
+                    </ul>
+                    <button @click="openCalendly()" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Cotizar Ahora</button>
                 </div>
             </div>
 
             <div class="text-center mt-12 lazy-load">
-                <p class="text-lg text-gray-600 mb-4">¿No encuentras el servicio que buscas?</p>
-                <button @click="openCalendly()" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                    Solicitar Servicio Personalizado
-                </button>
+                <p class="text-lg mb-4" style="color: var(--text-muted);">¿No encuentras el servicio que buscas?</p>
+                <button @click="openCalendly()" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all transform hover:scale-105 animate-gradient">Solicitar Servicio Personalizado</button>
             </div>
         </div>
     </section>
 
-    <!-- Por Qué Nosotros -->
-    <section id="nosotros" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="nosotros" class="py-20" style="background: var(--bg-alt);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="lazy-load">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">¿Por qué MultiConstrucciones?</h2>
-                    <p class="text-xl text-gray-600 mb-8">Cuidamos tu casa como si fuera la nuestra. Somos un equipo local en Puebla con técnicos especializados y procesos claros.</p>
-                    
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--text);">¿Por qué MultiConstrucciones?</h2>
+                    <p class="text-xl mb-8" style="color: var(--text-muted);">Cuidamos tu casa como si fuera la nuestra. Somos un equipo local en Puebla con técnicos especializados y procesos claros.</p>
+
                     <div class="space-y-6">
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
                                 <div class="flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Equipo Local Expertos</h3>
-                                <p class="text-gray-600">Técnicos especializados de Puebla que conocen la zona y sus necesidades.</p>
+                                <h3 class="text-lg font-semibold" style="color: var(--text);">Equipo Local Expertos</h3>
+                                <p style="color: var(--text-muted);">Técnicos especializados de Puebla que conocen la zona y sus necesidades.</p>
                             </div>
                         </div>
-                        
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
                                 <div class="flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Procesos Claros</h3>
-                                <p class="text-gray-600">Inspección, cotización sin costo, ejecución segura y garantía por escrito.</p>
+                                <h3 class="text-lg font-semibold" style="color: var(--text);">Procesos Claros</h3>
+                                <p style="color: var(--text-muted);">Inspección, cotización sin costo, ejecución segura y garantía por escrito.</p>
                             </div>
                         </div>
-                        
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
                                 <div class="flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Precios Justos</h3>
-                                <p class="text-gray-600">Calidad, puntualidad y transparencia en cada proyecto. Sin sorpresas.</p>
+                                <h3 class="text-lg font-semibold" style="color: var(--text);">Precios Justos</h3>
+                                <p style="color: var(--text-muted);">Calidad, puntualidad y transparencia en cada proyecto. Sin sorpresas.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="lazy-load">
                     <div class="relative">
-                        <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232f855a;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%232b6cb0;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='48' fill='white' opacity='0.9'%3EEquipo MultiConstrucciones%3C/text%3E%3C/svg%3E"
-                            alt="Equipo MultiConstrucciones en Puebla"
-                            class="rounded-2xl shadow-2xl"
-                            loading="lazy"
-                        />
-                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Equipo de construcción profesional" class="rounded-2xl shadow-2xl w-full h-[400px] object-cover" loading="lazy">
+                        <div class="absolute -bottom-6 -right-6 p-6 rounded-xl shadow-lg" style="background: var(--card-bg); border: 1px solid var(--border);">
                             <div class="text-center">
-                                <div class="text-3xl font-bold text-primary">10+</div>
-                                <div class="text-gray-600">Años</div>
+                                <div class="text-3xl font-bold" style="color: var(--primary);">10+</div>
+                                <div style="color: var(--text-muted);">Años</div>
                             </div>
                         </div>
                     </div>
@@ -501,53 +419,44 @@
         </div>
     </section>
 
-    <!-- Testimonios -->
-    <section id="testimonios" class="py-20 bg-white">
+    <section id="testimonios" class="py-20" style="background: var(--bg);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 lazy-load">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Lo Que Dicen Nuestros Clientes</h2>
-                <p class="text-xl text-gray-600">Reseñas reales de vecinos en Puebla que confiaron en nosotros</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text);">Lo Que Dicen Nuestros Clientes</h2>
+                <p class="text-xl" style="color: var(--text-muted);">Reseñas reales de vecinos en Puebla que confiaron en nosotros</p>
             </div>
-            
+
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg" style="transition-delay: 0ms;">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Excelente servicio de impermeabilización. Mi azotea quedó como nueva y sin filtraciones. El equipo muy profesional y puntual."</p>
+                <div class="lazy-load rounded-2xl p-8 shadow-lg" style="transition-delay: 0ms; background: var(--card-bg); border: 1px solid var(--border);">
+                    <div class="flex mb-4 text-yellow-400">⭐⭐⭐⭐⭐</div>
+                    <p class="mb-6 italic" style="color: var(--text-muted);">"Excelente servicio de impermeabilización. Mi azotea quedó como nueva y sin filtraciones. El equipo muy profesional y puntual."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-xl">AG</div>
                         <div class="ml-4">
-                            <div class="font-semibold text-gray-900">Ana García</div>
-                            <div class="text-sm text-gray-600">San Andrés Cholula</div>
+                            <div class="font-semibold" style="color: var(--text);">Ana García</div>
+                            <div class="text-sm" style="color: var(--text-muted);">San Andrés Cholula</div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg" style="transition-delay: 100ms;">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Contraté el servicio de jardinería y quedé encantado. Transformaron mi jardín por completo. Muy recomendados en Puebla."</p>
+                <div class="lazy-load rounded-2xl p-8 shadow-lg" style="transition-delay: 100ms; background: var(--card-bg); border: 1px solid var(--border);">
+                    <div class="flex mb-4 text-yellow-400">⭐⭐⭐⭐⭐</div>
+                    <p class="mb-6 italic" style="color: var(--text-muted);">"Contraté el servicio de jardinería y quedé encantado. Transformaron mi jardín por completo. Muy recomendados en Puebla."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-xl">PM</div>
                         <div class="ml-4">
-                            <div class="font-semibold text-gray-900">Pedro Martínez</div>
-                            <div class="text-sm text-gray-600">Angelópolis</div>
+                            <div class="font-semibold" style="color: var(--text);">Pedro Martínez</div>
+                            <div class="text-sm" style="color: var(--text-muted);">Angelópolis</div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="lazy-load bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg" style="transition-delay: 200ms;">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Solución rápida a una fuga de agua urgente. Llegaron en menos de una hora y el precio fue justo. Definitivamente mi servicio de confianza."</p>
+                <div class="lazy-load rounded-2xl p-8 shadow-lg" style="transition-delay: 200ms; background: var(--card-bg); border: 1px solid var(--border);">
+                    <div class="flex mb-4 text-yellow-400">⭐⭐⭐⭐⭐</div>
+                    <p class="mb-6 italic" style="color: var(--text-muted);">"Solución rápida a una fuga de agua urgente. Llegaron en menos de una hora y el precio fue justo. Definitivamente mi servicio de confianza."</p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-xl">LR</div>
                         <div class="ml-4">
-                            <div class="font-semibold text-gray-900">Laura Reyes</div>
-                            <div class="text-sm text-gray-600">San Pedro Cholula</div>
+                            <div class="font-semibold" style="color: var(--text);">Laura Reyes</div>
+                            <div class="text-sm" style="color: var(--text-muted);">San Pedro Cholula</div>
                         </div>
                     </div>
                 </div>
@@ -555,225 +464,143 @@
         </div>
     </section>
 
-    <!-- Galería -->
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section class="py-20" style="background: var(--bg-alt);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 lazy-load">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nuestro Trabajo</h2>
-                <p class="text-xl text-gray-600">Proyectos realizados en Puebla y zona metropolitana</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text);">Nuestro Trabajo</h2>
+                <p class="text-xl" style="color: var(--text-muted);">Proyectos realizados en Puebla y zona metropolitana</p>
             </div>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square" style="transition-delay: 0ms;">
-                    <img 
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232f855a'/%3E%3Cstop offset='100%25' style='stop-color:%232b6cb0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23g1)'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='white'%3EJardinería%3C/text%3E%3C/svg%3E"
-                        alt="Proyecto de jardinería en Puebla"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <span class="text-white font-semibold">Jardinería Residencial</span>
+                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square cursor-pointer" style="transition-delay: 0ms;" @click="openLightbox('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80', 'Jardinería Residencial')">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&q=75" alt="Jardinería" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-semibold text-lg">Jardinería Residencial</span>
                     </div>
                 </div>
-                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square" style="transition-delay: 100ms;">
-                    <img 
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232b6cb0'/%3E%3Cstop offset='100%25' style='stop-color:%23f6ad55'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23g2)'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='white'%3EPintura%3C/text%3E%3C/svg%3E"
-                        alt="Proyecto de pintura en Puebla"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <span class="text-white font-semibold">Pintura Interior</span>
+                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square cursor-pointer" style="transition-delay: 100ms;" @click="openLightbox('https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=800&q=80', 'Pintura Interior')">
+                    <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&q=75" alt="Pintura" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-semibold text-lg">Pintura Interior</span>
                     </div>
                 </div>
-                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square" style="transition-delay: 200ms;">
-                    <img 
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f6ad55'/%3E%3Cstop offset='100%25' style='stop-color:%232f855a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23g3)'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='white'%3EImpermeabilización%3C/text%3E%3C/svg%3E"
-                        alt="Impermeabilización en Puebla"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <span class="text-white font-semibold">Impermeabilización</span>
+                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square cursor-pointer" style="transition-delay: 200ms;" @click="openLightbox('https://images.unsplash.com/photo-1631952112740-f7e4c1ed6ea4?w=800&q=80', 'Impermeabilización')">
+                    <img src="https://images.unsplash.com/photo-1631952112740-f7e4c1ed6ea4?w=400&q=75" alt="Impermeabilización" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-semibold text-lg">Impermeabilización</span>
                     </div>
                 </div>
-                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square" style="transition-delay: 300ms;">
-                    <img 
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232f855a'/%3E%3Cstop offset='100%25' style='stop-color:%23f6ad55'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23g4)'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='white'%3EPlomería%3C/text%3E%3C/svg%3E"
-                        alt="Plomería en Puebla"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <span class="text-white font-semibold">Plomería Residencial</span>
+                <div class="lazy-load group relative overflow-hidden rounded-xl aspect-square cursor-pointer" style="transition-delay: 300ms;" @click="openLightbox('https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=800&q=80', 'Plomería Residencial')">
+                    <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=400&q=75" alt="Plomería" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-white font-semibold text-lg">Plomería Residencial</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="py-20 bg-white">
+    <div x-show="lightboxOpen" x-cloak x-transition.opacity class="fixed inset-0 z-[100] flex items-center justify-center p-4 lightbox-backdrop" @click.away="lightboxOpen = false" @keydown.escape.window="lightboxOpen = false">
+        <button @click="lightboxOpen = false" class="absolute top-4 right-4 text-white/80 hover:text-white z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="max-w-4xl max-h-[90vh]">
+            <img :src="lightboxImage" :alt="lightboxCaption" class="w-full h-auto max-h-[80vh] object-contain rounded-2xl">
+            <p class="text-white text-center mt-4 text-lg font-semibold" x-text="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <section class="py-20" style="background: var(--bg);">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 lazy-load">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Preguntas Frecuentes</h2>
-                <p class="text-xl text-gray-600">Resolvemos tus dudas sobre nuestros servicios</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--text);">Preguntas Frecuentes</h2>
+                <p class="text-xl" style="color: var(--text-muted);">Resolvemos tus dudas sobre nuestros servicios</p>
             </div>
-            
+
             <div class="space-y-4" x-data="{ active: null }">
-                <div class="lazy-load border border-gray-200 rounded-xl overflow-hidden">
-                    <button @click="active = active === 1 ? null : 1" class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition">
-                        <span class="font-semibold text-gray-900 text-lg">¿Cuál es el área de cobertura?</span>
-                        <svg class="w-5 h-5 text-primary transition-transform duration-300" :class="{ 'rotate-180': active === 1 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                <div class="lazy-load rounded-xl overflow-hidden" style="border: 1px solid var(--border); background: var(--card-bg);">
+                    <button @click="active = active === 1 ? null : 1" class="w-full px-6 py-5 text-left flex justify-between items-center hover:opacity-80 transition">
+                        <span class="font-semibold text-lg" style="color: var(--text);">¿Cuál es el área de cobertura?</span>
+                        <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': active === 1 }" style="color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div x-show="active === 1" x-cloak x-transition class="px-6 pb-5">
-                        <p class="text-gray-600">Cubrimos toda Puebla y zona metropolitana incluyendo Angelópolis, Cholula, San Andrés Cholula, San Pedro Cholula y municipios aledaños.</p>
+                        <p style="color: var(--text-muted);">Cubrimos toda Puebla y zona metropolitana incluyendo Angelópolis, Cholula, San Andrés Cholula, San Pedro Cholula y municipios aledaños.</p>
                     </div>
                 </div>
-                
-                <div class="lazy-load border border-gray-200 rounded-xl overflow-hidden">
-                    <button @click="active = active === 2 ? null : 2" class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition">
-                        <span class="font-semibold text-gray-900 text-lg">¿La cotización tiene algún costo?</span>
-                        <svg class="w-5 h-5 text-primary transition-transform duration-300" :class="{ 'rotate-180': active === 2 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                <div class="lazy-load rounded-xl overflow-hidden" style="border: 1px solid var(--border); background: var(--card-bg);">
+                    <button @click="active = active === 2 ? null : 2" class="w-full px-6 py-5 text-left flex justify-between items-center hover:opacity-80 transition">
+                        <span class="font-semibold text-lg" style="color: var(--text);">¿La cotización tiene algún costo?</span>
+                        <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': active === 2 }" style="color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div x-show="active === 2" x-cloak x-transition class="px-6 pb-5">
-                        <p class="text-gray-600">No, todas nuestras cotizaciones son completamente gratuitas. Realizamos una inspección inicial sin costo y te entregamos un presupuesto detallado sin compromiso.</p>
+                        <p style="color: var(--text-muted);">No, todas nuestras cotizaciones son completamente gratuitas. Realizamos una inspección inicial sin costo y te entregamos un presupuesto detallado sin compromiso.</p>
                     </div>
                 </div>
-                
-                <div class="lazy-load border border-gray-200 rounded-xl overflow-hidden">
-                    <button @click="active = active === 3 ? null : 3" class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition">
-                        <span class="font-semibold text-gray-900 text-lg">¿Ofrecen garantía?</span>
-                        <svg class="w-5 h-5 text-primary transition-transform duration-300" :class="{ 'rotate-180': active === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                <div class="lazy-load rounded-xl overflow-hidden" style="border: 1px solid var(--border); background: var(--card-bg);">
+                    <button @click="active = active === 3 ? null : 3" class="w-full px-6 py-5 text-left flex justify-between items-center hover:opacity-80 transition">
+                        <span class="font-semibold text-lg" style="color: var(--text);">¿Ofrecen garantía?</span>
+                        <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': active === 3 }" style="color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div x-show="active === 3" x-cloak x-transition class="px-6 pb-5">
-                        <p class="text-gray-600">Sí, todos nuestros trabajos cuentan con garantía por escrito. Respadamos la calidad de nuestro servicio y ofrecemos soporte post-trabajo.</p>
+                        <p style="color: var(--text-muted);">Sí, todos nuestros trabajos cuentan con garantía por escrito. Respadamos la calidad de nuestro servicio y ofrecemos soporte post-trabajo.</p>
                     </div>
                 </div>
-                
-                <div class="lazy-load border border-gray-200 rounded-xl overflow-hidden">
-                    <button @click="active = active === 4 ? null : 4" class="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition">
-                        <span class="font-semibold text-gray-900 text-lg">¿Cuánto tiempo toma un servicio?</span>
-                        <svg class="w-5 h-5 text-primary transition-transform duration-300" :class="{ 'rotate-180': active === 4 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                <div class="lazy-load rounded-xl overflow-hidden" style="border: 1px solid var(--border); background: var(--card-bg);">
+                    <button @click="active = active === 4 ? null : 4" class="w-full px-6 py-5 text-left flex justify-between items-center hover:opacity-80 transition">
+                        <span class="font-semibold text-lg" style="color: var(--text);">¿Cuánto tiempo toma un servicio?</span>
+                        <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': active === 4 }" style="color: var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div x-show="active === 4" x-cloak x-transition class="px-6 pb-5">
-                        <p class="text-gray-600">Depende del tipo y alcance del servicio. Desde reparaciones exprés el mismo día hasta proyectos de remodelación de varias semanas. Durante la cotización te damos un timeline preciso.</p>
+                        <p style="color: var(--text-muted);">Depende del tipo y alcance del servicio. Desde reparaciones exprés el mismo día hasta proyectos de remodelación. Durante la cotización te damos un timeline preciso.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Contacto -->
     <section id="contacto" class="py-20 bg-gradient-to-br from-primary to-secondary text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="lazy-load">
                     <h2 class="text-4xl md:text-5xl font-bold mb-6">¿Listo para mejorar tu hogar?</h2>
                     <p class="text-xl mb-8 text-white/90">Solicita tu cotización sin costo y descubre por qué somos la mejor opción en Puebla.</p>
-                    
                     <div class="space-y-4">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span>Cotización sin costo ni compromiso</span>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span>Garantía por escrito en todos los trabajos</span>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span>Técnicos especializados y puntuales</span>
-                        </div>
+                        <div class="flex items-center"><svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Cotización sin costo ni compromiso</span></div>
+                        <div class="flex items-center"><svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Garantía por escrito en todos los trabajos</span></div>
+                        <div class="flex items-center"><svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Técnicos especializados y puntuales</span></div>
                     </div>
-                    
                     <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                        <a href="tel:+522222553525" class="inline-flex items-center justify-center bg-white text-primary px-6 py-3 rounded-full font-semibold hover:shadow-xl transition-all">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                            222 255 3525
+                        <a href="tel:+522222553525" class="inline-flex items-center justify-center bg-white text-primary px-6 py-3 rounded-full font-semibold hover:shadow-xl transition-all transform hover:scale-105">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg> 222 255 3525
                         </a>
                         <button @click="openCalendly()" class="inline-flex items-center justify-center border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition-all">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            Agendar Visita
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> Agendar Visita
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="lazy-load bg-white rounded-2xl p-8 shadow-2xl">
                     <h3 class="text-2xl font-bold text-gray-900 mb-6">Solicita tu Cotización Gratuita</h3>
-                    
-                    <div id="hubspot-form-container"></div>
-                    
-                    <form @submit.prevent="submitForm()" x-show="!hubspotLoaded" class="space-y-4">
-                        <input type="text" name="website" x-model="form.honeypot" class="hidden" tabindex="-1" autocomplete="off">
-                        
+
+                    <form name="contact" netlify netlify-honeypot="bot-field" @submit.prevent="submitForm()" class="space-y-4">
+                        <input type="hidden" name="form-name" value="contact">
+                        <input type="text" name="bot-field" class="hidden" tabindex="-1" autocomplete="off">
+
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo *</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                x-model="form.name"
-                                required
-                                maxlength="100"
-                                pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,100}"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                                placeholder="Tu nombre"
-                            >
+                            <input type="text" id="name" name="name" x-model="form.name" required maxlength="100" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,100}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="Tu nombre">
                         </div>
-                        
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                x-model="form.email"
-                                required
-                                maxlength="100"
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                                placeholder="tu@email.com"
-                            >
+                            <input type="email" id="email" name="email" x-model="form.email" required maxlength="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="tu@email.com">
                         </div>
-                        
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
-                            <input 
-                                type="tel" 
-                                id="phone" 
-                                x-model="form.phone"
-                                required
-                                maxlength="20"
-                                pattern="[0-9\s\-\+\(\)]{10,20}"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                                placeholder="222 255 3525"
-                            >
+                            <input type="tel" id="phone" name="phone" x-model="form.phone" required maxlength="20" pattern="[0-9\s\-\+\(\)]{10,20}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="222 255 3525">
                         </div>
-                        
                         <div>
                             <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Servicio de Interés</label>
-                            <select 
-                                id="service" 
-                                x-model="form.service"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                            >
+                            <select id="service" name="service" x-model="form.service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
                                 <option value="">Selecciona un servicio</option>
                                 <option value="jardineria">Jardinería</option>
                                 <option value="pintura">Pintura</option>
@@ -785,50 +612,22 @@
                                 <option value="otro">Otro</option>
                             </select>
                         </div>
-                        
                         <div>
                             <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
-                            <textarea 
-                                id="message" 
-                                x-model="form.message"
-                                rows="4"
-                                maxlength="1000"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                                placeholder="Cuéntanos sobre tu proyecto..."
-                            ></textarea>
+                            <textarea id="message" name="message" x-model="form.message" rows="4" maxlength="1000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
                         </div>
-                        
                         <div class="flex items-start">
-                            <input 
-                                type="checkbox" 
-                                id="privacy" 
-                                x-model="form.privacy"
-                                required
-                                class="mt-1 mr-2"
-                            >
-                            <label for="privacy" class="text-sm text-gray-600">
-                                Acepto el <a href="#" class="text-primary hover:underline">aviso de privacidad</a> y autorizo el uso de mis datos para contacto *
-                            </label>
+                            <input type="checkbox" id="privacy" name="privacy" x-model="form.privacy" required class="mt-1 mr-2">
+                            <label for="privacy" class="text-sm text-gray-600">Acepto el <a href="#" class="text-primary hover:underline">aviso de privacidad</a> y autorizo el uso de mis datos para contacto *</label>
                         </div>
-                        
-                        <button 
-                            type="submit" 
-                            :disabled="formSubmitting"
-                            class="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-lg font-semibold hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
+                        <button type="submit" :disabled="formSubmitting" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-lg font-semibold hover:shadow-xl transition-all disabled:opacity-50">
                             <span x-show="!formSubmitting">Enviar Solicitud</span>
                             <span x-show="formSubmitting">Enviando...</span>
                         </button>
-                        
-                        <p class="text-xs text-gray-500 text-center">
-                            🔒 Tus datos están protegidos. Nunca compartimos información con terceros.
-                        </p>
                     </form>
-                    
+
                     <div x-show="formSuccess" x-cloak class="text-center py-8">
-                        <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                        <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         <h4 class="text-2xl font-bold text-gray-900 mb-2">¡Solicitud Enviada!</h4>
                         <p class="text-gray-600">Te contactaremos en las próximas 24 horas.</p>
                     </div>
@@ -837,106 +636,74 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer style="background: var(--bg-alt); border-top: 1px solid var(--border);" class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">
-                        MultiConstrucciones
-                    </h3>
-                    <p class="text-gray-400 mb-4">Cuidamos tu casa como si fuera la nuestra. Expertos en mantenimiento residencial en Puebla desde 2014.</p>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text);">MultiConstrucciones</h3>
+                    <p style="color: var(--text-muted);" class="mb-4">Cuidamos tu casa como si fuera la nuestra. Expertos en mantenimiento residencial en Puebla desde 2014.</p>
                     <div class="flex space-x-4">
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">
+                        <a href="#" class="hover:opacity-70 transition" style="color: var(--text-muted);">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">
+                        <a href="#" class="hover:opacity-70 transition" style="color: var(--text-muted);">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">
+                        <a href="#" class="hover:opacity-70 transition" style="color: var(--text-muted);">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
                         </a>
                     </div>
                 </div>
-                
                 <div>
-                    <h4 class="font-semibold mb-4">Enlaces Rápidos</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Servicios</a></li>
-                        <li><a href="#nosotros" class="text-gray-400 hover:text-white transition">Nosotros</a></li>
-                        <li><a href="#testimonios" class="text-gray-400 hover:text-white transition">Testimonios</a></li>
-                        <li><a href="#contacto" class="text-gray-400 hover:text-white transition">Contacto</a></li>
+                    <h4 class="font-semibold mb-4" style="color: var(--text);">Enlaces Rápidos</h4>
+                    <ul class="space-y-2" style="color: var(--text-muted);">
+                        <li><a href="#servicios" class="hover:text-primary transition">Servicios</a></li>
+                        <li><a href="#nosotros" class="hover:text-primary transition">Nosotros</a></li>
+                        <li><a href="#testimonios" class="hover:text-primary transition">Testimonios</a></li>
+                        <li><a href="#contacto" class="hover:text-primary transition">Contacto</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h4 class="font-semibold mb-4">Servicios</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Jardinería</a></li>
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Pintura</a></li>
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Plomería</a></li>
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Electricidad</a></li>
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Impermeabilización</a></li>
-                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition">Albañilería</a></li>
+                    <h4 class="font-semibold mb-4" style="color: var(--text);">Servicios</h4>
+                    <ul class="space-y-2" style="color: var(--text-muted);">
+                        <li><a href="#servicios" class="hover:text-primary transition">Jardinería</a></li>
+                        <li><a href="#servicios" class="hover:text-primary transition">Pintura</a></li>
+                        <li><a href="#servicios" class="hover:text-primary transition">Plomería</a></li>
+                        <li><a href="#servicios" class="hover:text-primary transition">Electricidad</a></li>
+                        <li><a href="#servicios" class="hover:text-primary transition">Impermeabilización</a></li>
+                        <li><a href="#servicios" class="hover:text-primary transition">Albañilería</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h4 class="font-semibold mb-4">Contacto</h4>
-                    <ul class="space-y-2 text-gray-400">
+                    <h4 class="font-semibold mb-4" style="color: var(--text);">Contacto</h4>
+                    <ul class="space-y-2" style="color: var(--text-muted);">
                         <li class="flex items-start">
-                            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
+                            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                             <span>Bonampak 7A, La Rivera, San Andrés Cholula, Pue.</span>
                         </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                            <a href="tel:+522222553525" class="hover:text-white transition">222 255 3525</a>
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                            <a href="mailto:info@multiconstrucciones.com" class="hover:text-white transition">info@multiconstrucciones.com</a>
-                        </li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><a href="tel:+522222553525" class="hover:text-primary transition">222 255 3525</a></li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><a href="mailto:info@multiconstrucciones.com" class="hover:text-primary transition">info@multiconstrucciones.com</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+            <div class="border-t pt-8 text-center" style="border-color: var(--border); color: var(--text-muted);">
                 <p>&copy; 2026 MultiConstrucciones. Todos los derechos reservados.</p>
                 <div class="mt-2 space-x-4">
-                    <a href="#" class="hover:text-white transition">Aviso de Privacidad</a>
-                    <a href="#" class="hover:text-white transition">Términos y Condiciones</a>
+                    <a href="#" class="hover:text-primary transition">Aviso de Privacidad</a>
+                    <a href="#" class="hover:text-primary transition">Términos y Condiciones</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a 
-        href="https://wa.me/522222553525?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios%20de%20mantenimiento"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition-all transform hover:scale-110 z-50"
-        aria-label="Contactar por WhatsApp"
-    >
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
+    <a href="https://wa.me/522222553525?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios%20de%20mantenimiento" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition-all transform hover:scale-110 hover:shadow-green-500/40 z-50" aria-label="WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
 
-    <!-- Calendly Modal -->
     <div x-show="calendlyOpen" x-cloak @click.away="calendlyOpen = false" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden relative">
             <button @click="calendlyOpen = false" class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
             <div class="calendly-inline-widget h-[80vh]" data-url="https://calendly.com/tuusuario/30min"></div>
         </div>
@@ -947,34 +714,33 @@
 
     <script>
         function sanitizeInput(input) {
-            return DOMPurify.sanitize(input, { 
-                ALLOWED_TAGS: [],
-                ALLOWED_ATTR: []
-            });
+            return DOMPurify.sanitize(input, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
         }
-        
+
         function landingPage() {
             return {
                 mobileMenuOpen: false,
                 calendlyOpen: false,
-                hubspotLoaded: false,
                 formSubmitting: false,
                 formSuccess: false,
-                form: {
-                    name: '',
-                    email: '',
-                    phone: '',
-                    service: '',
-                    message: '',
-                    privacy: false,
-                    honeypot: ''
-                },
-                
+                darkMode: localStorage.getItem('darkMode') === 'true' ||
+                         (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
+                lightboxOpen: false,
+                lightboxImage: '',
+                lightboxCaption: '',
+                form: { name: '', email: '', phone: '', service: '', message: '', privacy: false, bot_field: '' },
+
                 init() {
                     this.initLazyLoad();
                     this.init3DBackground();
+                    this.initHeroAnimations();
                 },
-                
+
+                toggleDarkMode() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('darkMode', this.darkMode);
+                },
+
                 initLazyLoad() {
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
@@ -983,153 +749,130 @@
                             }
                         });
                     }, { threshold: 0.1 });
-                    
-                    document.querySelectorAll('.lazy-load').forEach(el => {
-                        observer.observe(el);
-                    });
+                    document.querySelectorAll('.lazy-load').forEach(el => observer.observe(el));
                 },
-                
+
+                initHeroAnimations() {
+                    if (typeof anime !== 'undefined') {
+                        anime.timeline({ delay: 800 })
+                            .add({ targets: '#hero-title', opacity: [0, 1], translateY: [40, 0], duration: 1000, easing: 'easeOutExpo' })
+                            .add({ targets: '#hero-title + p', opacity: [0, 1], translateY: [20, 0], duration: 800, easing: 'easeOutExpo' }, '-=600')
+                            .add({ targets: '.flex.flex-col', opacity: [0, 1], translateY: [20, 0], duration: 800, easing: 'easeOutExpo' }, '-=400');
+                    }
+                },
+
+                animeHover(el) {
+                    if (typeof anime !== 'undefined') {
+                        anime({ targets: el, scale: 1.02, duration: 400, easing: 'easeOutExpo' });
+                    }
+                },
+
+                animeLeave(el) {
+                    if (typeof anime !== 'undefined') {
+                        anime({ targets: el, scale: 1, duration: 400, easing: 'easeOutExpo' });
+                    }
+                },
+
+                openLightbox(src, caption) {
+                    this.lightboxImage = src;
+                    this.lightboxCaption = caption;
+                    this.lightboxOpen = true;
+                },
+
                 init3DBackground() {
                     const canvas = document.getElementById('hero-canvas');
                     if (!canvas) return;
-                    
                     const scene = new THREE.Scene();
                     const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-                    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
-                    
+                    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
                     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-                    
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
                     const group = new THREE.Group();
-                    
-                    const geo1 = new THREE.TorusGeometry(10, 3, 16, 100);
-                    const mat1 = new THREE.MeshBasicMaterial({ 
-                        color: 0xffffff, 
-                        wireframe: true,
-                        transparent: true,
-                        opacity: 0.08
+
+                    const shapes = [
+                        { geo: new THREE.TorusGeometry(10, 3, 16, 100), color: 0xffffff, opacity: 0.08, pos: [0, 0, 0] },
+                        { geo: new THREE.OctahedronGeometry(8), color: 0xf6ad55, opacity: 0.06, pos: [15, -5, -5] },
+                        { geo: new THREE.IcosahedronGeometry(6), color: 0xffffff, opacity: 0.05, pos: [-18, 8, -3] },
+                        { geo: new THREE.TorusKnotGeometry(4, 1.5, 64, 8), color: 0x48bb78, opacity: 0.04, pos: [0, 15, -10] }
+                    ];
+
+                    shapes.forEach(s => {
+                        const mat = new THREE.MeshBasicMaterial({ color: s.color, wireframe: true, transparent: true, opacity: s.opacity });
+                        const mesh = new THREE.Mesh(s.geo, mat);
+                        mesh.position.set(s.pos[0], s.pos[1], s.pos[2]);
+                        mesh.userData = { speed: { x: 0.001 + Math.random() * 0.002, y: 0.002 + Math.random() * 0.003, z: 0.0005 * Math.random() } };
+                        group.add(mesh);
                     });
-                    const torus = new THREE.Mesh(geo1, mat1);
-                    group.add(torus);
-                    
-                    const geo2 = new THREE.OctahedronGeometry(8);
-                    const mat2 = new THREE.MeshBasicMaterial({
-                        color: 0xf6ad55,
-                        wireframe: true,
-                        transparent: true,
-                        opacity: 0.06
-                    });
-                    const octa = new THREE.Mesh(geo2, mat2);
-                    octa.position.x = 15;
-                    octa.position.y = -5;
-                    group.add(octa);
-                    
-                    const geo3 = new THREE.IcosahedronGeometry(6);
-                    const mat3 = new THREE.MeshBasicMaterial({
-                        color: 0xffffff,
-                        wireframe: true,
-                        transparent: true,
-                        opacity: 0.05
-                    });
-                    const ico = new THREE.Mesh(geo3, mat3);
-                    ico.position.x = -18;
-                    ico.position.y = 8;
-                    group.add(ico);
-                    
+
+                    const particleCount = 200;
+                    const particleGeo = new THREE.BufferGeometry();
+                    const positions = new Float32Array(particleCount * 3);
+                    for (let i = 0; i < particleCount * 3; i++) positions[i] = (Math.random() - 0.5) * 80;
+                    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                    const particleMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.05, transparent: true, opacity: 0.3 });
+                    const particles = new THREE.Points(particleGeo, particleMat);
+                    group.add(particles);
+
                     scene.add(group);
-                    
                     camera.position.z = 35;
-                    
+                    let mouseX = 0, mouseY = 0;
+
+                    document.addEventListener('mousemove', (e) => {
+                        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+                    }, { passive: true });
+
                     function animate() {
                         requestAnimationFrame(animate);
-                        group.rotation.x += 0.001;
-                        group.rotation.y += 0.002;
-                        group.rotation.z += 0.0005;
+                        group.children.forEach(child => {
+                            if (child.isMesh && child.userData.speed) {
+                                child.rotation.x += child.userData.speed.x;
+                                child.rotation.y += child.userData.speed.y;
+                                child.rotation.z += child.userData.speed.z;
+                            }
+                        });
+                        if (particles) particles.rotation.y += 0.0002;
+                        group.rotation.y += 0.001;
+                        group.rotation.x += mouseY * 0.0005;
+                        group.rotation.z += mouseX * 0.0003;
                         renderer.render(scene, camera);
                     }
                     animate();
-                    
+
                     window.addEventListener('resize', () => {
                         camera.aspect = canvas.clientWidth / canvas.clientHeight;
                         camera.updateProjectionMatrix();
                         renderer.setSize(canvas.clientWidth, canvas.clientHeight);
                     }, { passive: true });
                 },
-                
-                loadHubSpotForm() {},
-                
+
                 async submitForm() {
-                    if (this.form.honeypot) {
-                        console.warn('Spam detected');
-                        return;
-                    }
-                    
                     if (!this.form.name || !this.form.email || !this.form.phone || !this.form.privacy) {
                         alert('Por favor completa todos los campos requeridos');
                         return;
                     }
-                    
                     this.formSubmitting = true;
-                    
+                    const form = document.querySelector('form[name="contact"]');
+                    const data = new FormData(form);
                     try {
-                        const sanitizedData = {
-                            name: sanitizeInput(this.form.name),
-                            email: sanitizeInput(this.form.email),
-                            phone: sanitizeInput(this.form.phone),
-                            service: sanitizeInput(this.form.service),
-                            message: sanitizeInput(this.form.message)
-                        };
-                        
-                        const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(sanitizedData)
-                        });
-                        
-                        if (response.ok) {
+                        const response = await fetch('/', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+                        if (response.ok || response.redirected) {
                             this.formSuccess = true;
-                            this.resetForm();
-                        } else {
-                            throw new Error('Form submission failed');
-                        }
+                            this.form = { name: '', email: '', phone: '', service: '', message: '', privacy: false, bot_field: '' };
+                            if (typeof gtag !== 'undefined') gtag('event', 'form_submission', { 'event_category': 'contact', 'event_label': 'Cotización' });
+                        } else throw new Error('Form submission failed');
                     } catch (error) {
-                        console.error('Error:', error);
-                        alert('Hubo un error al enviar el formulario. Por favor intenta nuevamente.');
-                    } finally {
-                        this.formSubmitting = false;
-                    }
+                        alert('Hubo un error al enviar. Por favor intenta nuevamente o llámanos al 222 255 3525.');
+                    } finally { this.formSubmitting = false; }
                 },
-                
-                resetForm() {
-                    this.form = {
-                        name: '',
-                        email: '',
-                        phone: '',
-                        service: '',
-                        message: '',
-                        privacy: false,
-                        honeypot: ''
-                    };
-                },
-                
-                openCalendly() {
-                    this.calendlyOpen = true;
-                },
-                
-                scrollToContact() {
-                    document.getElementById('contacto').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                }
+
+                openCalendly() { this.calendlyOpen = true; },
+                scrollToContact() { document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' }); }
             }
         }
-        
-        window.addEventListener('load', () => {});
-        
-        if (window.self !== window.top) {
-            window.top.location = window.self.location;
-        }
-    </script>
 
+        if (window.self !== window.top) { window.top.location = window.self.location; }
+    </script>
 </body>
 </html>
